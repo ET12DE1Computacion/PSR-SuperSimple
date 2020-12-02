@@ -1,8 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    Layout = null;
+ }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mercado Simple</title>
+</head>
+<body>
+    <h2>Elegi donde entrar</h2>
+    <a asp-controller="Categoria" asp-action="Index">Categorias</a><br />
+    <a asp-controller="Producto" asp-action="Index">Productos</a>
+</body>
+</html>

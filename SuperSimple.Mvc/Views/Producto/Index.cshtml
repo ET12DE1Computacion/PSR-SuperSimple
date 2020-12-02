@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SuperSimple.Core.Producto>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mercado Simple - Productos</title>
+</head>
+<body>
+    <a asp-action="FormAlta">Alta Producto</a><br />
+    <h5>Productos</h5>
+    <table>
+        <thead>
+            <tr><td>Nombre</td><td>Acciones</td></tr>
+        </thead>
+        <tbody>
+            @foreach (SuperSimple.Core.Producto producto in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Producto" asp-action="Detalle" asp-route-id="@producto.Id">@producto.Nombre</a>
+                    </td>
+                    <td>
+                        <!--Aca tengo que hacer un formulario por que dentro de él,
+                            es la unica forma de invocar al método con verbo post-->
+                        <form asp-controller="Producto" asp-action="Eliminar" method="post">
+                            <input type="hidden" asp-for="@producto.Id" />
+                            <button type="submit">Eliminar</button>
+                            <a asp-controller="Producto" asp-action="Modificar" asp-route-id="@producto.Id">Modificar</a>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr />
+    <a asp-controller="Categoria" asp-action="Index">Categorias</a>
+</body>
+</html>

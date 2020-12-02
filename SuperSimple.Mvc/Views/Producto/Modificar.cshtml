@@ -1,0 +1,40 @@
+﻿@model SuperSimple.ViewModels.VMProducto;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mercado Simple - Productos</title>
+</head>
+<body>
+    <form asp-action="Modificar" method="post">
+        <div asp-validation-summary="All"></div>
+        <div>
+            @Html.HiddenFor(m => m.Producto.Id)
+        </div>
+        <div>
+            <label asp-for="@Model.Producto.Nombre">Nombre:</label>
+            <input asp-for="@Model.Producto.Nombre" />
+        </div>
+        <div>
+            <label asp-for="@Model.PrecioNuevo">Precio Unitario:</label>
+            <input asp-for="@Model.PrecioNuevo">
+        </div>
+        <div>
+            <label asp-for="@Model.Producto.Cantidad">Cantidad:</label>
+            <input asp-for="@Model.Producto.Cantidad">
+        </div>
+        <div>
+            <select asp-for="idCategoriaSeleccionado">
+                <option value="">Elegi una opción</option>
+                @foreach (SuperSimple.Core.Categoria categoria in Model.Categorias)
+                {
+                    <option value="@categoria.Id">@categoria.Nombre</option>
+                }
+            </select>
+        </div>
+        <button type="submit">Modificar</button>
+    </form>
+</body>
+</html>

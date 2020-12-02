@@ -1,0 +1,34 @@
+﻿@model SuperSimple.Core.Producto
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mercado Simple - Detalle @Model.Nombre</title>
+</head>
+<body>
+    <div>
+        <h3>@Model.Nombre</h3>
+        Precio Unitario: @Model.PrecioUnitario<br>
+        Cantidad: @Model.Cantidad<br />
+    </div>
+    <hr />
+    <table>
+        <thead>
+            <tr><td>Fecha Hora</td><td>Precio</td></tr>
+        </thead>
+        <tbody>
+            @foreach (SuperSimple.Core.PrecioHistorico precio in Model.Precios)
+            {
+                <tr>
+                    <td>@precio.FechaHora.ToString()</td><td>@precio.PrecioUnitario</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr />
+    <a asp-controller="Categoria" asp-action="Index">Categorias</a>
+    <a asp-action="Index">Productos</a>
+</body>
+</html>
