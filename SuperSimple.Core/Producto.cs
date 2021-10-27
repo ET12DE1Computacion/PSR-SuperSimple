@@ -10,7 +10,7 @@ namespace SuperSimple.Core
         public int Cantidad { get; set; }
         public List<PrecioHistorico> Precios { get; set; }
         public Producto() => Precios = new List<PrecioHistorico>();
-        public void cambiarPrecio(float precio)
+        public void CambiarPrecio(float precio)
         {
             PrecioUnitario = precio;
             Precios.Add(new PrecioHistorico(precio));

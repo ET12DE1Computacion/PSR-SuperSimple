@@ -22,8 +22,10 @@ namespace SuperSimple.Controllers
         [HttpGet]
         public IActionResult FormAlta(int? idCategoria)
         {
-            var vmProducto = new VMProducto(Repositorio.Categorias);
-            vmProducto.idCategoriaSeleccionado = idCategoria;
+            var vmProducto = new VMProducto(Repositorio.Categorias)
+            {
+                IdCategoriaSeleccionado = idCategoria
+            };
             return View(vmProducto);
         }
 
@@ -32,8 +34,8 @@ namespace SuperSimple.Controllers
         {
             if (Validar(vMProducto))
             {
-                var categoria = Repositorio.GetCategoria(vMProducto.idCategoriaSeleccionado.Value);
-                vMProducto.Producto.cambiarPrecio(vMProducto.PrecioNuevo);
+                var categoria = Repositorio.GetCategoria(vMProducto.IdCategoriaSeleccionado.Value);
+                vMProducto.Producto.CambiarPrecio(vMProducto.PrecioNuevo);
                 categoria.AgregarProducto(vMProducto.Producto);
                 Repositorio.AgregarProducto(vMProducto.Producto);
             }
@@ -59,9 +61,11 @@ namespace SuperSimple.Controllers
             {
                 return NotFound();
             }
-            var vmProducto = new VMProducto(producto);
-            vmProducto.Categorias = Repositorio.Categorias;
-            vmProducto.PrecioNuevo = producto.PrecioUnitario;
+            var vmProducto = new VMProducto(producto)
+            {
+                Categorias = Repositorio.Categorias,
+                PrecioNuevo = producto.PrecioUnitario
+            };
             return View(vmProducto);
         }
 
@@ -80,6 +84,6 @@ namespace SuperSimple.Controllers
             return View("Index", Repositorio.Productos);
         }
         private bool Validar(VMProducto vMProducto)
-            => (vMProducto.idCategoriaSeleccionado.HasValue) || (vMProducto.PrecioNuevo > 0);
+            => (vMProducto.IdCategoriaSeleccionado.HasValue) || (vMProducto.PrecioNuevo > 0);
     }
 }

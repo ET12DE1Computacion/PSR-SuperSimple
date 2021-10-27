@@ -7,7 +7,7 @@ namespace SuperSimple.Core
     {
         static int idCategoria = 1;
         static int idProducto = 1;
-        static List<Categoria> categorias = new List<Categoria>();
+        static readonly List<Categoria> categorias = new List<Categoria>();
         public static IEnumerable<Categoria> Categorias
             => categorias;
         public static Categoria GetCategoria(int id)
