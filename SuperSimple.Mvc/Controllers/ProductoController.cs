@@ -4,19 +4,15 @@ using SuperSimple.ViewModels;
 
 namespace SuperSimple.Controllers
 {
-    public class ProductoController: Controller
+    public class ProductoController : Controller
     {
         public IActionResult Index()
             => View(Repositorio.Productos);
-        
+
         public IActionResult Detalle(int id)
         {
             var producto = Repositorio.GetProducto(id);
-            if (producto is null)
-            {
-                return NotFound();
-            }
-            return View(producto);
+            return producto is null ? NotFound() : View(producto);
         }
 
         [HttpGet]
