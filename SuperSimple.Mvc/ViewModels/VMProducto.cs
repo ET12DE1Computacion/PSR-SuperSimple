@@ -1,32 +1,41 @@
-﻿using SuperSimple.Core;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using SuperSimple.Core;
 
-namespace SuperSimple.ViewModels
+namespace SuperSimple.Mvc.ViewModels;
+
+// Esta clase es una contenedora 
+public class VMProducto
 {
-    // Esta clase es una contenedora 
-    public class VMProducto
+    public SelectList CategoriasList { get; set; }
+    public Producto Producto { get; set; }
+    public float PrecioNuevo { get; set; }
+    public int? IdCategoriaSeleccionado { get; set; }
+    public VMProducto(){}
+    public VMProducto(IEnumerable<Categoria> categorias, Producto? producto = null)
     {
-        public IEnumerable<Categoria> Categorias { get; set; }
-        public Producto Producto { get; set; }
-        public float PrecioNuevo { get; set; }
-        public int? IdCategoriaSeleccionado { get; set; }
-        public VMProducto() => Producto = new Producto();
-        public VMProducto(IEnumerable<Categoria> categorias) : this()
-            => Categorias = categorias;
-        public VMProducto(Producto producto)
+        CategoriasList =
+            new SelectList(items: categorias, dataValueField: nameof(Categoria.Id), dataTextField: nameof(Categoria.Nombre));
+        if (producto is null)
         {
-            Producto = producto;            
+            Producto = new Producto();
+            PrecioNuevo = 0;
         }
-        //Este método podria estar en otra casa que se suele llamar como "capa de servicio"
-        //Ej: https://qastack.mx/programming/14887871/creating-a-service-layer-for-my-mvc-application
-        internal void Actualizar(Producto producto)
+        else
         {
-            producto.Nombre = Producto.Nombre;
-            if (producto.PrecioUnitario!=PrecioNuevo)
-            {
-                producto.CambiarPrecio(PrecioNuevo);
-            }
-            producto.Cantidad = Producto.Cantidad;
+            Producto = producto;
+            PrecioNuevo = producto.PrecioUnitario;
         }
+    }
+
+    //Este método podria estar en otra casa que se suele llamar como "capa de servicio"
+    //Ej: https://qastack.mx/programming/14887871/creating-a-service-layer-for-my-mvc-application
+    internal void Actualizar(Producto producto)
+    {
+        producto.Nombre = Producto.Nombre;
+        if (producto.PrecioUnitario != PrecioNuevo)
+        {
+            producto.CambiarPrecio(PrecioNuevo);
+        }
+        producto.Cantidad = Producto.Cantidad;
     }
 }

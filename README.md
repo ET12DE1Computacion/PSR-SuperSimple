@@ -20,7 +20,7 @@ git clone https://github.com/ET12DE1Computacion/SuperSimple
 
 ### Pre-requisitos 📋
 
-- .NET 5.0.7 (SDK .NET 5.0.301) [Descargar](https://dotnet.microsoft.com/download/dotnet/5.0)
+- .NET 6.0.5 (SDK .NET 6.0.300) [Descargar](https://dotnet.microsoft.com/download/dotnet/6.0)
 
 ## Despliegue 📦
 

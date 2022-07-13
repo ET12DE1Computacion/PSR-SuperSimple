@@ -1,4 +1,4 @@
-﻿@model SuperSimple.ViewModels.VMProducto;
+﻿@model SuperSimple.Mvc.ViewModels.VMProducto;
 @{
     Layout = null;
 }
@@ -23,12 +23,8 @@
             <input asp-for="@Model.Producto.Cantidad">
         </div>
         <div>
-            <select asp-for="IdCategoriaSeleccionado">
-                <option value="">Elegi una opción</option>
-                @foreach (SuperSimple.Core.Categoria categoria in Model.Categorias)
-                {
-                    <option value="@categoria.Id">@categoria.Nombre</option>
-                }
+            <select asp-for="IdCategoriaSeleccionado" asp-items="@Model.CategoriasList">
+                <option disabled selected>--Elegir una categoria--</option>
             </select>
         </div>
         <button type="submit">Alta Producto</button>
